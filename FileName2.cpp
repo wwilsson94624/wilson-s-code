@@ -70,11 +70,12 @@ int main() {
 
 	for (int i = 1; i <= X; i++)
 	{
+		cout << "|";
 		for (int j = 1; j <= Y; j++)
 		{
-			cout << " |";
+			cout << "[ ]";
 		}
-		cout << "\n";
+		cout << "|" << i << "\n";
 	}//輸出空白地圖
 
 	cout << "輸入動作:(1-pick, 2-hammer, 3-flag, 4-endgame)";
@@ -85,39 +86,40 @@ int main() {
 			cin >> b >> a;
 			for (int i = 1; i <= X; i++)
 			{
+				cout << "|";
 				for (int j = 1; j <= Y; j++)
 				{
 					if ((i == a && j == b) && xy[i][j] < 20)//(a,b)那格
 					{
 						if (xy[i][j] >= 10) {
-							cout << "*|";//地雷
+							cout << "[*]";//地雷
 							xy[i][j] = -xy[i][j];//標記已挖過
 						}
 						else if (xy[i][j] == 0) {
-							cout << xy[i][j] << "|";
+							cout << "   ";
 							xy[i][j] = 9;//標記已挖過的0，因為0沒有負數故用9作替代
 						}
 						else if (xy[i][j] == 9)
-							cout << xy[i][j] - 9 << "|";//怕重複挖
+							cout << "   ";//怕重複挖
 						else if (xy[i][j] < 0)
-							cout << -xy[i][j] << "|";//怕重複挖
+							cout << "[" << -xy[i][j] << "]";//怕重複挖
 						else {
-							cout << xy[i][j] << "|";
+							cout << "[" << xy[i][j] << "]";
 							xy[i][j] = -xy[i][j];//標記已挖過
 						}
 					}
 					else if ((xy[i][j] < 0) && (xy[i][j] > -10))
-						cout << -xy[i][j] << "|";//顯示已挖過
+						cout << "[" << -xy[i][j] << "]";//顯示已挖過
 					else if (xy[i][j] <= -10)
-						cout << "*|";//顯示已挖過的*
+						cout << "[*]";//顯示已挖過的*
 					else if (xy[i][j] == 9)
-						cout << xy[i][j] - 9 << "|";//顯示已挖過的0
+						cout << "   ";//顯示已挖過的0
 					else if (xy[i][j] >= 20)
-						cout << "F|";//旗子
+						cout << "[F]";//旗子
 					else
-						cout << " |";
+						cout << "[ ]";
 				}
-				cout << "\n";
+				cout << "|" << i << "\n";
 			}//輸出地圖
 		}
 		else if (command == 2)
@@ -126,6 +128,7 @@ int main() {
 			cin >> b >> a;
 			for (int i = 1; i <= X; i++)
 			{
+				cout << "|";
 				for (int j = 1; j <= Y; j++)
 				{
 					if (((i == a - 1 && j == b - 1) || (i == a && j == b - 1) || (i == a + 1 && j == b - 1) ||
@@ -133,34 +136,34 @@ int main() {
 						(i == a - 1 && j == b + 1) || (i == a && j == b + 1) || (i == a + 1 && j == b + 1)) && xy[i][j] < 20)
 					{
 						if (xy[i][j] >= 10) {
-							cout << "*|";//地雷
+							cout << "[*]";//地雷
 							xy[i][j] = -xy[i][j];//標記已挖過
 						}
 						else if (xy[i][j] == 0) {
-							cout << xy[i][j] << "|";
+							cout << "   ";
 							xy[i][j] = 9;//標記已挖過的0，因為0沒有負數故用9作替代
 						}
 						else if (xy[i][j] == 9)
-							cout << xy[i][j] - 9 << "|";//怕重複挖
+							cout << "   ";//怕重複挖
 						else if (xy[i][j] < 0)
-							cout << -xy[i][j] << "|";//怕重複挖
+							cout << "[" << -xy[i][j] << "]";//怕重複挖
 						else {
-							cout << xy[i][j] << "|";
+							cout << "[" << xy[i][j] << "]";
 							xy[i][j] = -xy[i][j];//標記已挖過
 						}
 					}
 					else if ((xy[i][j] < 0) && (xy[i][j] > -10))
-						cout << -xy[i][j] << "|";//顯示已挖過
+						cout << "[" << -xy[i][j] << "]";//顯示已挖過
 					else if (xy[i][j] <= -10)
-						cout << "*|";//顯示已挖過的*
+						cout << "[*]";//顯示已挖過的*
 					else if (xy[i][j] == 9)
-						cout << xy[i][j] - 9 << "|";//顯示已挖過的0
+						cout << "   ";//顯示已挖過的0
 					else if (xy[i][j] >= 20)
-						cout << "F|";//旗子
+						cout << "[F]";//旗子
 					else
-						cout << " |";
+						cout << "[ ]";
 				}
-				cout << "\n";
+				cout << "|" << i << "\n";
 			}//輸出地圖
 		}
 		else if (command == 3)
@@ -169,59 +172,61 @@ int main() {
 			cin >> b >> a;
 			for (int i = 1; i <= X; i++)
 			{
+				cout << "|";
 				for (int j = 1; j <= Y; j++)
 				{
 					if (i == a && j == b)//(a,b)那格
 					{
 						if (xy[i][j] >= 20)
 						{
-							cout << " |";
+							cout << "[ ]";
 							xy[i][j] -= 20;//拔旗子
 						}
 						else
 						{
-							cout << "F|";
+							cout << "[F]";
 							xy[i][j] += 20;//下旗子
 						}
 					}
 					else if ((xy[i][j] < 0) && (xy[i][j] > -10))
-						cout << -xy[i][j] << "|";//顯示已挖過
+						cout << "[" << -xy[i][j] << "]";//顯示已挖過
 					else if (xy[i][j] <= -10)
-						cout << "*|";//顯示已挖過的*
+						cout << "[*]";//顯示已挖過的*
 					else if (xy[i][j] == 9)
-						cout << xy[i][j] - 9 << "|";//顯示已挖過的0
+						cout << "   ";//顯示已挖過的0
 					else if (xy[i][j] >= 20)
-						cout << "F|";//旗子
+						cout << "[F]";//旗子
 					else
-						cout << " |";
+						cout << "[ ]";
 				}
-				cout << "\n";
+				cout << "|" << i << "\n";
 			}//輸出地圖
 		}
 		else if (command == 4) {
 			for (int i = 1; i <= X; i++)
 			{
+				cout << "|";
 				for (int j = 1; j <= Y; j++)
 				{
 					if ((xy[i][j] >= 10 && (xy[i][j] < 20)) || xy[i][j] == -10 || xy[i][j] >= 30)
-						cout << "*|";//地雷
+						cout << "[*]";//地雷
 					else if ((xy[i][j] < 0) && (xy[i][j] > -10))
-						cout << -xy[i][j] << "|";//顯示已挖過
+						cout << "[" << -xy[i][j] << "]";//顯示已挖過
 					else if (xy[i][j] <= -10)
-						cout << "*|";//顯示已挖過的*
-					else if (xy[i][j] == 9)
-						cout << xy[i][j] - 9 << "|";//顯示已挖過的0
+						cout << "[*]";//顯示已挖過的*
 					else if (xy[i][j] >= 20)
-						cout << "F|";//旗子
-					else if (xy[i][j] == 0)
-						cout << " |";
+						cout << "[F]";//旗子
+					else if ((xy[i][j] == 0) || (xy[i][j] == 9))
+						cout << "   ";
 					else
-						cout << xy[i][j] << "|";
+						cout << "[" << xy[i][j] << "]";
 				}
-				cout << "\n";
+				cout << "|" << i << "\n";
 			}//輸出終局地圖
 			return 0;
 		}
 		cout << "輸入動作:(1-pick, 2-hammer, 3-flag, 4-endgame)";
 	}
 }
+
+
